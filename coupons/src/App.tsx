@@ -12,7 +12,7 @@ import SideBar from "./Components/HomeArea/SideBar/SideBar";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: darkMode ? 'dark' : 'light',
     }

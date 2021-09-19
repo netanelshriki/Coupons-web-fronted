@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
   pos: {
     marginBottom: 12,
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
   box: {
     marginLeft: "39%",
     maxWidth: "50px",
@@ -99,7 +103,7 @@ function Login(): JSX.Element {
   return (
     <Box className={classes.box}>
       <div className="Login">
-        <Card className={classes.root} square elevation={125}>
+        <Card className={classes.root} square >
           <CardContent>
             <Typography className={classes.pos}>Login</Typography>
             <br />
@@ -148,29 +152,29 @@ function Login(): JSX.Element {
 
               <br />
 
-              <select
-                placeholder="ClientType..."
-             
-                name="clientType"
-                {...register("clientType", {
-                  required: true,
-                })}
-              >
-                <option value="-" disabled>
-                  Choose here
-                </option>
-
-                <option id="dark1" value={ClientType.admin}>
-                  ADMIN
-                </option>
-                <option id="dark1" value={ClientType.company}>
-                  COMPANY
-                </option>
-                <option id="dark1" value={ClientType.customer}>
-                  CUSTOMER
-                </option>
-              
-              </select>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-controlled-open-select-label">
+                  Client Type
+                </InputLabel>
+                <Select
+                  labelId="demo-controlled-open-select-label"
+                  id="demo-controlled-open-select"
+                  open={open}
+                  onClose={handleClose}
+                  onOpen={handleOpen}
+                  onChange={handleChange}
+                  {...register("clientType", {
+                    required: { value: true, message: "Missing User Type" },
+                  })}
+                >
+                  <MenuItem value="">
+                    <em>Type:</em>
+                  </MenuItem>
+                  <MenuItem value="CUSTOMER">CUSTOMER</MenuItem>
+                  <MenuItem value="ADMIN">ADMIN</MenuItem>
+                  <MenuItem value="COMPANY">COMPANY</MenuItem>
+                </Select>
+              </FormControl>
 
               <br />
               <br />

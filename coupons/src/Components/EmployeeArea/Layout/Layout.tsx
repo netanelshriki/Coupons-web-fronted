@@ -37,10 +37,11 @@ function Layout() {
       setGet(response.data);
     };
     axiosGet();
-  }, [gets]);
+  }, []);
 
   function deletePost(id) {
-    axios
+    tokenAxios
+
       .delete<any>("http://localhost:8080/admin/customers/" + id)
       .then(() => {
         notify.success("Employee deleted!");
@@ -51,18 +52,18 @@ function Layout() {
   function updatePost(id) {
     console.log(id);
     history.push("/editcust/" + id);
-    const result = axios
-      .put<any>("http://localhost:8080/admin/customers/update")
-      .then(() => {
-        notify.success("Customer updated!!");
-        setGet([]);
-      });
+    // const result = axios
+    //   .put<any>("http://localhost:8080/admin/customers/update")
+    //   .then(() => {
+    //     notify.success("Customer updated!!");
+    //     setGet([]);
+    //   });
   }
 
   const res = gets.map((get) => {
     return (
-      <TableBody>
-        <TableRow>
+      <TableBody key={get.id}>
+        <TableRow >
           <TableCell>{get.id} </TableCell>
           <TableCell align="right">{get.firstName}</TableCell>
           <TableCell align="right">{get.lastName}</TableCell>
@@ -104,3 +105,4 @@ function Layout() {
 }
 
 export default Layout;
+

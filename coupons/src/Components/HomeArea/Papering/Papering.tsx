@@ -27,7 +27,7 @@ function Papering(): JSX.Element {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-			<Paper elevation={9} >
+			<Paper  >
              
 <AddEmployee/>
 

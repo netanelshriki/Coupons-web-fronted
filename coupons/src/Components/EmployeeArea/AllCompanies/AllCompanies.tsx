@@ -38,11 +38,12 @@ function AllCompanies(): JSX.Element {
           setGet(response.data);
         };
         axiosGet();
-      }, [gets]);
+      }, []);
     
       function deletePost(id) {
-        axios
-          .delete<any>("http://localhost:8080/admin/customers/" + id)
+        
+        tokenAxios
+          .delete<any>("http://localhost:8080/admin/companies/" + id)
           .then(() => {
             notify.success("Company deleted!");
             setGet([]);
@@ -53,7 +54,7 @@ function AllCompanies(): JSX.Element {
         console.log(id);
         history.push("/editcust/" + id);
         const result = axios
-          .put<any>("http://localhost:8080/admin/customers/update")
+          .put<any>("http://localhost:8080/admin/customers")
           .then(() => {
             notify.success("Company updated!!");
             setGet([]);
@@ -62,10 +63,10 @@ function AllCompanies(): JSX.Element {
     
       const res = gets.map((get) => {
         return (
-          <TableBody>
+          <TableBody key={get.id}>
             <TableRow>
               <TableCell>{get.id} </TableCell>
-              <TableCell align="right">{get.name}</TableCell>
+              <TableCell align="right">{get.firstName}</TableCell>
               <TableCell align="right">{get.email}</TableCell>
               <TableCell align="right">{get.password}</TableCell>
               <TableCell align="right">{get.clientType}</TableCell>

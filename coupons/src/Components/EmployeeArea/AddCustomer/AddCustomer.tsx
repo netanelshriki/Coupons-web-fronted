@@ -85,7 +85,7 @@ function AddEmployee(): JSX.Element {
 
    
     <div>
-      <Card  className={classes.root} square  elevation={125}>
+      <Card  className={classes.root} square>
         <CardContent>
           <Typography className={classes.pos}>Add new Customer</Typography>
         

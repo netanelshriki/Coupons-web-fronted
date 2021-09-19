@@ -21,6 +21,7 @@ import UserModel from "../../../UserModel/UserModel";
 import store from "../../Redux/Store";
 import Globals from "../../../Services/Globals";
 import Input from '@material-ui/core/Input';
+import tokenAxios from "../../../Services/interceptor";
 
 
   interface RouteParam {
@@ -40,6 +41,9 @@ interface EditDetailsProps extends RouteComponentProps<RouteParam> { }
 
  const [client,setClient] = useState(store.getState().authState.client);
 
+const [customer, setCustomer] = useState()
+
+
 
 async function send(user:UserModel) {
   user.id = currentId
@@ -55,15 +59,17 @@ async function send(user:UserModel) {
   console.log(customer)
 
 // updating DB
- const response = await axios.put<UserModel>( Globals.urls.admin+"customers/update",customer );
+ const response = await tokenAxios.put<UserModel>( Globals.urls.admin+"customers",customer );
 
  //update global app state
  store.dispatch(EmployeesUpdatedAction(response.data))
 
 //update local
 setEmployee(store.getState().EmployeeState.employees.find((c)=>c.id === +props.match.params?.id) );
+    
+notify.success("Customer updated!");
 
-history.push('/employees');
+history.push('/customers');
 
 };
 
@@ -72,15 +78,15 @@ history.push('/employees');
   
     return (
       <div className="EditEmployee">
-        {/* <Card>
+        <Card>
           <CardContent>
             <Typography>Edit Customer</Typography>
             <br />
-            <form onSubmit={handleSubmit(send)}> */}
+            <form onSubmit={handleSubmit(send)}> 
 
-              {/* <TextField
+            <TextField
                 id="outlined-basic"
-                label="name"
+                label="first name"
                 variant="outlined"
                 type="text"
                 name="firstName"
@@ -101,14 +107,14 @@ history.push('/employees');
               />
   
               <br />
-              <FormHelperText error={true}>{errors.name?.message}</FormHelperText>
+              <FormHelperText error={true}>{errors.firstName?.message}</FormHelperText>
               <br />
 
               <TextField
                 id="outlined-basic"
-                label="name"
+                label="last name"
                 variant="outlined"
-                defaultValue={client?.lastName}
+             //   defaultValue={employee.lastName}
                 type="text"
                 name="lastName"
                 {...register("lastName" , {
@@ -136,7 +142,7 @@ history.push('/employees');
                 id="outlined-basic"
                 label="email"
                 variant="outlined"
-                defaultValue={client?.email}
+           //     defaultValue={client?.email}
                 type="email"
                 {...register("email", {
                   required: {
@@ -156,7 +162,7 @@ history.push('/employees');
                 id="outlined-basic"
                 label="password"
                 variant="outlined"
-                 defaultValue={client?.email}
+               //  defaultValue={client?.email}
                 type="password"
                 {...register("password", {
                   minLength: {
@@ -178,8 +184,8 @@ history.push('/employees');
             </form>
             
           </CardContent>
-          <Button onClick={()=>history.push("/employees")}variant="contained" color="secondary">back</Button>
-        </Card> */}
+          <Button onClick={()=>history.push("/customers")}variant="contained" color="secondary">back</Button>
+        </Card>
      
       </div> 
     );

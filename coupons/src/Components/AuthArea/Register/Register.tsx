@@ -96,7 +96,7 @@ function Register(): JSX.Element {
   return (
     <Box className={classes.box}>
       <div>
-        <Card className={classes.root} elevation={125}>
+        <Card className={classes.root}>
           <CardContent>
             <Typography className={classes.pos}>
               Register for Customer
