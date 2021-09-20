@@ -2,7 +2,7 @@ import ClientType from "./clientTypeModel";
 
 class ClientModel{
     public clientType?: ClientType;
-    public clientId?:number;
+    public id?:number;
     public name?:string;
     public token?: string;
 

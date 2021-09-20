@@ -29,7 +29,8 @@ function App() {
       <CssBaseline>
        <Container className="App" >
 
-        <Header />
+<Header />
+
           <Switch onChange={handleDarkMode} value={darkMode}/>
       
          <Routing />

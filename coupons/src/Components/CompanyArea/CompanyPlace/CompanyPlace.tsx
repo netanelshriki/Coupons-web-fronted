@@ -12,9 +12,10 @@ import Coupon from "../../../UserModel/Coupon";
 
 
 function CompanyPlace(): JSX.Element {
-    const [gets, setGet] = useState<Coupon[]>([]);
+  
+  const [gets, setGet] = useState<Coupon[]>([]);
     const history = useHistory();
-    const companyID = useState(store.getState().authState.client[0]);
+    const company = useState(store.getState().authState.client);
     const token = useState(store.getState().authState.client.token);
 
 
@@ -26,20 +27,18 @@ function CompanyPlace(): JSX.Element {
 
 
         const axiosGet = async () => {
-        
-          console.log(companyID[0]);
-         
+                 
           const response = await tokenAxios.get<Coupon[]>(
             "http://localhost:8080/company/coupons/",
              {
               params: {
-                companyID: companyID[0],
+                companyID: company[0].id,
               }
              } );
           setGet(response.data);
         };
         axiosGet();
-      }, [gets]);
+      }, []);
 
 const result = gets.map((get) => {
   return (

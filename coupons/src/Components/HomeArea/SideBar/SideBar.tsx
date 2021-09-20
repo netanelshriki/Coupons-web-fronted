@@ -13,7 +13,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import WorkIcon from '@material-ui/icons/Work';
 import { BrowserRouter as Router,NavLink, Route, Switch, useHistory } from 'react-router-dom';
 import { ButtonBase } from '@material-ui/core';
-
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import AddEmployee from '../../EmployeeArea/AddCustomer/AddCustomer';
 import store from '../../Redux/Store';
 import ClientType from '../../../UserModel/clientTypeModel';
@@ -82,24 +82,26 @@ export default function SideBar({children}) {
       <List>
      
         
+       
           <ListItem button={true} >
         {client?.clientType===ClientType.admin ?
          <Button onClick={()=> history.push("/customer")} className={classes.btn}>
          <ListItemIcon> <MailIcon /></ListItemIcon>
        <ListItemText primary='add customer'/>
          </Button>
-       :
+       :client?.clientType===ClientType.customer?
        <Button onClick={()=> history.push("/check")} className={classes.btn}>
        <ListItemIcon> <MailIcon /></ListItemIcon>
-     <ListItemText primary='nothing for you'/>
+     <ListItemText primary='nothing for customer'/>
        </Button>
-        }
-        
-         
-         
-         
-         
-          </ListItem>
+       : 
+       <Button onClick={()=> history.push("/company")} className={classes.btn}>
+       <ListItemIcon> <AccountBoxIcon /></ListItemIcon>
+     <ListItemText primary='your area'/>
+       </Button>
+      }
+       
+        </ListItem>
 
       </List>
    <Divider variant="middle" light={true} />
