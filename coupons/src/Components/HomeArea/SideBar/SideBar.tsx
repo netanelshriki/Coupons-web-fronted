@@ -151,13 +151,34 @@ export default function SideBar({children}) {
       : 
       <Button onClick={()=> history.push("/company/advanced")} className={classes.btn}>
       <ListItemIcon> <AccountBoxIcon /></ListItemIcon>
-    <ListItemText primary='more options'/>
+    <ListItemText primary='max prise'/>
       </Button>
      }
                   </ListItem>
-
       </List>
-    
+      <Divider variant="middle" light={true} />
+      
+      <List>
+
+      <ListItem button={true} >
+        {client?.clientType===ClientType.admin ?
+         <Button onClick={()=> history.push("/companies")} className={classes.btn}>
+         <ListItemIcon> <MailIcon /></ListItemIcon>
+       <ListItemText primary='All companies'/>
+         </Button>
+      :client?.clientType===ClientType.customer?
+      <Button onClick={()=> history.push("/customer/details")} className={classes.btn}>
+      <ListItemIcon> <AccountBoxIcon /></ListItemIcon>
+    <ListItemText primary='my details'/>
+      </Button>
+      : 
+      <Button onClick={()=> history.push("/company/category")} className={classes.btn}>
+      <ListItemIcon> <AccountBoxIcon /></ListItemIcon>
+    <ListItemText primary='by category'/>
+      </Button>
+     }
+                  </ListItem>
+      </List>
       {/* <Divider variant="middle" light={true} />
       <List>
       <ListItem button key='WorkIcon'>

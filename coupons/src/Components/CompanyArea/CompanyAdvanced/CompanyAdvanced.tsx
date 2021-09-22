@@ -22,13 +22,13 @@ function CompanyAdvanced(): JSX.Element {
   
     
 
-      async function send(prize: any) {
+      async function send(send: any) {
       
-        console.log(prize);
+        console.log(send);
 
         const byMax = {
-            "companyId":cust[0].id,
-            "prize":prize
+            companyId:cust[0].id,
+            prize: send.prize
         }
                    
         const response = await tokenAxios.post<Coupon[]>(
@@ -39,21 +39,20 @@ function CompanyAdvanced(): JSX.Element {
 
      const result = gets.map((get) => {
         return (
-          <TableBody>
-            <TableRow>
-              <TableCell>{get.id} </TableCell>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <TableCell align="right">{get.companyID}</TableCell>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <TableCell align="right">{get.category}</TableCell>&nbsp;
+         
+            <TableRow key={get.id}>
+              <TableCell>{get.id} </TableCell>
+              <TableCell align="right">{get.category}</TableCell>
               <TableCell align="right">{get.title}</TableCell>
-              <TableCell align="right">{get.description}</TableCell>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <TableCell align="right">{get.startDate}</TableCell>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <TableCell align="right">{get.endDate}</TableCell>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <TableCell align="right">{get.amount}</TableCell>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <TableCell align="right">{get.price}</TableCell>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <TableCell align="right">{get.description}</TableCell>
+              <TableCell align="right">{get.startDate}</TableCell>
+              <TableCell align="right">{get.endDate}</TableCell>
+              <TableCell align="right">{get.amount}</TableCell>
+              <TableCell align="right">{get.price}</TableCell>
               <TableCell align="right">{get.image}</TableCell>
             
             </TableRow>
-          </TableBody>
+      
         );
       });
    
@@ -86,7 +85,6 @@ function CompanyAdvanced(): JSX.Element {
                 <TableHead>
                   <TableRow>
                     <TableCell>Id</TableCell>
-                    <TableCell align="right">company id</TableCell>
                     <TableCell align="right"> category&nbsp;</TableCell>
                     <TableCell align="right">title&nbsp;</TableCell>
                     <TableCell align="right">description&nbsp;</TableCell>
@@ -97,10 +95,25 @@ function CompanyAdvanced(): JSX.Element {
                     <TableCell align="right">image&nbsp;</TableCell>
                   </TableRow>
                 </TableHead>
+                <TableBody>
+                {gets && result}
+                </TableBody>
                 </Table>
     
 
-                {gets && result}
+            
+                
+                <br/>
+                <br/>
+
+                <Button
+            onClick={() => history.push("/")}
+            variant="contained"
+            color="secondary"
+          >
+            home
+          </Button>
+             
                 </>
 
 

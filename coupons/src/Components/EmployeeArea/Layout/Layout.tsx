@@ -32,7 +32,8 @@ function Layout() {
       setGet(response.data);
     };
     axiosGet();
-  }, []);
+  
+  }, [gets]);
 
   function deletePost(id) {
     tokenAxios

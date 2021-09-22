@@ -22,6 +22,7 @@ import Box from "@material-ui/core/Box";
 import CredentialsModel from "../../../UserModel/CredentialsModel";
 import { useState } from "react";
 import ClientModel from "../../../UserModel/ClientModel";
+import ClientType from "../../../UserModel/clientTypeModel";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -149,6 +150,8 @@ function Login(): JSX.Element {
                 <Select
                   labelId="demo-controlled-open-select-label"
                   id="demo-controlled-open-select"
+                
+                  defaultValue={ClientType.type}
                   open={open}
                   onClose={handleClose}
                   onOpen={handleOpen}
@@ -157,14 +160,41 @@ function Login(): JSX.Element {
                     required: { value: true, message: "Missing User Type" },
                   })}
                 >
+                
                   <MenuItem value="">
                     <em>Type:</em>
-                  </MenuItem>
-                  <MenuItem value="CUSTOMER">CUSTOMER</MenuItem>
-                  <MenuItem value="ADMIN">ADMIN</MenuItem>
-                  <MenuItem value="COMPANY">COMPANY</MenuItem>
+                 </MenuItem>
+                  <MenuItem value={ClientType.customer}>CUSTOMER</MenuItem>
+                  <MenuItem value={ClientType.admin}>ADMIN</MenuItem>
+                  <MenuItem value={ClientType.company}>COMPANY</MenuItem>
                 </Select>
               </FormControl>
+              
+              {/* <FormControl className={classes.formControl}>
+                <InputLabel id="demo-controlled-open-select-label">
+                  Client Type
+                </InputLabel>
+                <Select
+                  labelId="demo-controlled-open-select-label"
+                  id="demo-controlled-open-select"
+              
+                  open={open}
+                  onClose={handleClose}
+                  onOpen={handleOpen}
+                  onChange={handleChange}
+                  {...register("clientType", {
+                    required: { value: true, message: "Missing User Type" },
+                  })}
+                >
+                
+                  <MenuItem value="">
+                    <em>Type:</em>
+                 </MenuItem>
+                  <MenuItem value="CUSTOMER">CUSTOMER</MenuItem>
+                  <MenuItem value="ADMIN">ADMIN</MenuItem>
+                  <MenuItem value='COMPANY'>COMPANY</MenuItem>
+                </Select>
+              </FormControl> */}
 
               <br />
               <br />

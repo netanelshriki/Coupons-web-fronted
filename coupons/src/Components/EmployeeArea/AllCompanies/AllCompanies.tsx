@@ -34,7 +34,7 @@ function AllCompanies(): JSX.Element {
           setGet(response.data);
         };
         axiosGet();
-      }, []);
+      }, [gets]);
     
       function deletePost(id) {
         
