@@ -29,7 +29,7 @@ function CompanyPlace(): JSX.Element {
         const axiosGet = async () => {
                  
           const response = await tokenAxios.get<Coupon[]>(
-            "http://localhost:8080/company/coupons/",
+            "http://localhost:8080/company/coupons",
              {
               params: {
                 companyID: company[0].id,

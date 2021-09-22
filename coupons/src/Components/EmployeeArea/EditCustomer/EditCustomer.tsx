@@ -2,25 +2,19 @@ import {
     Button,
     Card,
     CardContent,
-    FormControl,
     FormHelperText,
-    InputLabel,
-    Select,
     TextField,
     Typography,
   } from "@material-ui/core";
   import axios from "axios";
   import { useForm } from "react-hook-form";
-  import { RouteComponentProps, useHistory, useParams } from "react-router-dom";
+  import { RouteComponentProps, useHistory } from "react-router-dom";
   import notify from "../../../Services/Notifilcation";
-  import { EmployeesAddedAction, EmployeesUpdatedAction } from "../../Redux/EmployeesSatate";
-  import Library from "../../Redux/Store";
-  import { Alert } from "@material-ui/lab";
-import { useEffect, useState } from "react";
+  import {  EmployeesUpdatedAction } from "../../Redux/EmployeesSatate";
+import { useState } from "react";
 import UserModel from "../../../UserModel/UserModel";
 import store from "../../Redux/Store";
 import Globals from "../../../Services/Globals";
-import Input from '@material-ui/core/Input';
 import tokenAxios from "../../../Services/interceptor";
 
 
@@ -193,7 +187,5 @@ history.push('/customers');
   
   export default EditEmployee;
 
-function useSelector(arg0: (state: any) => any) {
-  throw new Error("Function not implemented.");
-}
+
   

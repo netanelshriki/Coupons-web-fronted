@@ -1,12 +1,9 @@
 import {
   Badge,
   Button,
-  createMuiTheme,
-  CssBaseline,
   Divider,
   IconButton,
   makeStyles,
-  ThemeProvider,
   Toolbar,
   Typography,
 } from "@material-ui/core";
@@ -16,10 +13,9 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useSpring, animated, config } from "react-spring";
 import SideBar from "../SideBar/SideBar";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import store from "../../Redux/Store";
 import { useEffect, useState } from "react";
-import { Switch } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   title: {

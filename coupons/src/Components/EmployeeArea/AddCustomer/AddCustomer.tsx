@@ -2,11 +2,8 @@ import {
   Button,
   Card,
   CardContent,
-  FormControl,
   FormHelperText,
-  InputLabel,
   makeStyles,
-  Select,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -16,10 +13,7 @@ import { useHistory } from "react-router-dom";
 import notify from "../../../Services/Notifilcation";
 import UserModel from "../../../UserModel/UserModel";
 import { EmployeesAddedAction } from "../../Redux/EmployeesSatate";
-import Library from "../../Redux/Store";
 import "./AddCustomer.css";
-import { Alert } from "@material-ui/lab";
-import Papering from "../../HomeArea/Papering/Papering";
 import store from "../../Redux/Store";
 import { useEffect } from "react";
 import tokenAxios from "../../../Services/interceptor";

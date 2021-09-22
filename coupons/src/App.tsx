@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
-import AddEmployee from "./Components/EmployeeArea/AddCustomer/AddCustomer";
-import Layout from "./Components/EmployeeArea/Layout/Layout";
 import { Container, createMuiTheme, createTheme, CssBaseline, Switch, ThemeProvider } from "@material-ui/core";
 import Header from "./Components/HomeArea/Header/Header";
-import Main from "./Components/HomeArea/Main/Main";
 import { BrowserRouter } from "react-router-dom";
 import Routing from "./Components/HomeArea/Routing/Routing";
-import SideBar from "./Components/HomeArea/SideBar/SideBar";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);

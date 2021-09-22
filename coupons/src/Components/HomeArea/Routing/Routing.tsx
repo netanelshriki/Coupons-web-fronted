@@ -2,10 +2,8 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Login from "../../AuthArea/Login/Login";
 import Logout from "../../AuthArea/Logout/Logout";
 import Register from "../../AuthArea/Register/Register";
-import AddEmployee from "../../EmployeeArea/AddCustomer/AddCustomer";
 import Layout from "../../EmployeeArea/Layout/Layout";
 import Cards from "../Cards/Cards";
-import EditEmployee from "../../EmployeeArea/EditCustomer/EditCustomer";
 import Papering from "../Papering/Papering";
 import "./Routing.css";
 import Information from "../Information/Information";
@@ -13,6 +11,10 @@ import AddCustomer from "../../EmployeeArea/AddCustomer/AddCustomer";
 import EditCustomer from "../../EmployeeArea/EditCustomer/EditCustomer";
 import AllCompanies from "../../EmployeeArea/AllCompanies/AllCompanies";
 import CompanyPlace from "../../CompanyArea/CompanyPlace/CompanyPlace";
+import CustomerCoupons from "../../CustomerArea/CustomerCoupons/CustomerCoupons";
+import CustomerDetails from "../../CustomerArea/CustomerDetails/CustomerDetails";
+import CompanyDetails from "../../CompanyArea/CompanyDetails/CompanyDetails";
+import CompanyAdvanced from "../../CompanyArea/CompanyAdvanced/CompanyAdvanced";
 
 function Routing(): JSX.Element {
   return (
@@ -29,6 +31,10 @@ function Routing(): JSX.Element {
         <Route path="/companies" component={AllCompanies} exact />
         <Route path="/company" component={CompanyPlace} exact />
         <Route path="/more" component={Information} exact />
+        <Route path="/area" component={CustomerCoupons} exact />
+        <Route path="/customer/details" component={CustomerDetails} exact />
+        <Route path="/company/details" component={CompanyDetails} exact />
+        <Route path="/company/advanced" component={CompanyAdvanced} exact />
         <Redirect from="/" to="/home" exact />
       </Switch>
     </div>

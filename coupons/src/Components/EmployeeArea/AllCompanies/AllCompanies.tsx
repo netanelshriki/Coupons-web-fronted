@@ -1,15 +1,11 @@
 import "./AllCompanies.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import UserModel from "../../../UserModel/UserModel";
 import {
   Button,
-  Icon,
-  Paper,
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
 } from "@material-ui/core";

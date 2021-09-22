@@ -8,13 +8,10 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import WorkIcon from '@material-ui/icons/Work';
-import { BrowserRouter as Router,NavLink, Route, Switch, useHistory } from 'react-router-dom';
-import { ButtonBase } from '@material-ui/core';
+import { BrowserRouter as Router, useHistory } from 'react-router-dom';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import AddEmployee from '../../EmployeeArea/AddCustomer/AddCustomer';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import store from '../../Redux/Store';
 import ClientType from '../../../UserModel/clientTypeModel';
 
@@ -90,9 +87,9 @@ export default function SideBar({children}) {
        <ListItemText primary='add customer'/>
          </Button>
        :client?.clientType===ClientType.customer?
-       <Button onClick={()=> history.push("/check")} className={classes.btn}>
-       <ListItemIcon> <MailIcon /></ListItemIcon>
-     <ListItemText primary='nothing for customer'/>
+       <Button onClick={()=> history.push("/area")} className={classes.btn}>
+       <ListItemIcon> <ShoppingCartIcon /></ListItemIcon>
+     <ListItemText primary='my coupons'/>
        </Button>
        : 
        <Button onClick={()=> history.push("/company")} className={classes.btn}>
@@ -107,6 +104,7 @@ export default function SideBar({children}) {
    <Divider variant="middle" light={true} />
     
       <List>
+
      
      <ListItem button={true} >
    {client?.clientType===ClientType.admin ?
@@ -114,11 +112,16 @@ export default function SideBar({children}) {
     <ListItemIcon> <MailIcon /></ListItemIcon>
   <ListItemText primary='All customers'/>
     </Button>
-  :
-  <Button onClick={()=> history.push("/check")} className={classes.btn}>
-  <ListItemIcon> <MailIcon /></ListItemIcon>
-<ListItemText primary='nothing for you'/>
-  </Button>
+    :client?.clientType===ClientType.customer?
+    <Button onClick={()=> history.push("/customer/details")} className={classes.btn}>
+    <ListItemIcon> <AccountBoxIcon /></ListItemIcon>
+  <ListItemText primary='my details'/>
+    </Button>
+    : 
+    <Button onClick={()=> history.push("/company/details")} className={classes.btn}>
+    <ListItemIcon> <AccountBoxIcon /></ListItemIcon>
+  <ListItemText primary='my details'/>
+    </Button>
    }
    
     
@@ -140,12 +143,17 @@ export default function SideBar({children}) {
          <ListItemIcon> <MailIcon /></ListItemIcon>
        <ListItemText primary='All companies'/>
          </Button>
-       :
-       <Button onClick={()=> history.push("/check")} className={classes.btn}>
-       <ListItemIcon> <MailIcon /></ListItemIcon>
-     <ListItemText primary='nothing for you'/>
-       </Button>
-        }
+      :client?.clientType===ClientType.customer?
+      <Button onClick={()=> history.push("/customer/details")} className={classes.btn}>
+      <ListItemIcon> <AccountBoxIcon /></ListItemIcon>
+    <ListItemText primary='my details'/>
+      </Button>
+      : 
+      <Button onClick={()=> history.push("/company/advanced")} className={classes.btn}>
+      <ListItemIcon> <AccountBoxIcon /></ListItemIcon>
+    <ListItemText primary='more options'/>
+      </Button>
+     }
                   </ListItem>
 
       </List>
