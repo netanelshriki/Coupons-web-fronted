@@ -11,6 +11,9 @@ import "./CompanyAdvanced.css";
 
 function CompanyAdvanced(): JSX.Element {
     
+ 
+
+
     const [gets, setGet] = useState<Coupon[]>([]);
     const history = useHistory();
       const cust = useState(store.getState().authState.client);
@@ -19,8 +22,9 @@ function CompanyAdvanced(): JSX.Element {
         handleSubmit,
         formState: { errors },
       } = useForm<any>();
-  
+     
     
+
 
       async function send(send: any) {
       

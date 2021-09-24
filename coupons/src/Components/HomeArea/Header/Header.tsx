@@ -41,6 +41,7 @@ function Header(): JSX.Element {
   });
 
   const [client, setClient] = useState(store.getState().authState.client);
+  
 
   useEffect(() => {
     console.log(client);
@@ -84,7 +85,8 @@ function Header(): JSX.Element {
         )}
 
         <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
+         
+          <Badge badgeContent={client===null?0:4} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>

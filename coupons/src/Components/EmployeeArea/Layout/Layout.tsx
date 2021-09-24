@@ -15,10 +15,13 @@ import notify from "../../../Services/Notifilcation";
 import { useHistory } from "react-router-dom";
 import store from "../../Redux/Store";
 import tokenAxios from "../../../Services/interceptor";
+import { EmployeesDownloadedAction } from "../../Redux/CompanyState";
 
 function Layout() {
   const [gets, setGet] = useState<UserModel[]>([]);
   const history = useHistory();
+  const [employee, setEmployee] = useState(store.getState().EmployeeState.employees);
+
 
   useEffect(() => {
     if (!store.getState().authState.client) {
@@ -30,6 +33,10 @@ function Layout() {
         "http://localhost:8080/admin/customers"
       );
       setGet(response.data);
+      store.dispatch(EmployeesDownloadedAction(response.data))
+
+
+    
     };
     axiosGet();
   

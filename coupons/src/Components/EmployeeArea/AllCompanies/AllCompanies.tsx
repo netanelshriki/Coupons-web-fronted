@@ -48,13 +48,8 @@ function AllCompanies(): JSX.Element {
     
       function updatePost(id) {
         console.log(id);
-        history.push("/editcust/" + id);
-        const result = axios
-          .put<any>("http://localhost:8080/admin/customers")
-          .then(() => {
-            notify.success("Company updated!!");
-            setGet([]);
-          });
+        history.push("/editcomp/" + id);
+    
       }
     
       const res = gets.map((get) => {
