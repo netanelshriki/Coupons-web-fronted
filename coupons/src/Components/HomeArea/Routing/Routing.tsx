@@ -19,6 +19,9 @@ import CouponsCategory from "../../CompanyArea/CouponsCategory/CouponsCategory";
 import Coupons from "../Coupons/Coupons";
 import AddCompany from "../../EmployeeArea/AddCompany/AddCompany";
 import EditCompany from "../../EmployeeArea/EditCompany/EditCompany";
+import CustomerAdvanced from "../../CustomerArea/CustomerAdvanced/CustomerAdvanced";
+import CustomerCategory from "../../CustomerArea/CustomerCategory/CustomerCategory";
+import CustomerOptions from "../../CustomerArea/CustomerOptions/CustomerOptions";
 
 function Routing(): JSX.Element {
   return (
@@ -41,7 +44,10 @@ function Routing(): JSX.Element {
         <Route path="/customer/details" component={CustomerDetails} exact />
         <Route path="/company/details" component={CompanyDetails} exact />
         <Route path="/company/advanced" component={CompanyAdvanced} exact />
+        <Route path="/customer/advanced" component={CustomerAdvanced} exact />
         <Route path="/company/category" component={CouponsCategory} exact />
+        <Route path="/customer/category" component={CustomerCategory} exact />
+        <Route path="/customer/options" component={CustomerOptions} exact />
         <Route path="/add/company" component={AddCompany} exact />
         <Redirect from="/" to="/home" exact />
       </Switch>

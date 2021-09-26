@@ -32,8 +32,14 @@ function CouponsCategory(): JSX.Element {
         setOpen(true);
       };
 
-      async function send(send: any) {
       
+
+      async function send(send: any) {
+        
+        console.log(store.getState().authState.client);
+      if(store.getState().authState.client===null){
+        history.push("/login")
+      }
         console.log(send);
 
         const byCategory = {
@@ -111,7 +117,7 @@ category                </InputLabel>
                   })}
                 >
                   <MenuItem value="">
-                    <em>Type:</em>
+                    <em>Category:</em>
                   </MenuItem>
                   <MenuItem value="FOOD">FOOD</MenuItem>
                   <MenuItem value="ELECTRICITY">ELECTRICITY</MenuItem>

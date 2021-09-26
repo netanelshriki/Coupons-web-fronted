@@ -11,7 +11,12 @@ import {
   TextField,
   Typography,
   FormControl,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
 } from "@material-ui/core";
+import clsx from "clsx";
+
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import notify from "../../../Services/Notifilcation";
@@ -23,6 +28,8 @@ import CredentialsModel from "../../../UserModel/CredentialsModel";
 import { useState } from "react";
 import ClientModel from "../../../UserModel/ClientModel";
 import ClientType from "../../../UserModel/clientTypeModel";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,24 +37,31 @@ const useStyles = makeStyles((theme) => ({
   },
 
   pos: {
-    marginBottom: 12,
+    marginBottom: 0,
+    marginLeft: "39%",
   },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
+ marginLeft: "25%"
   },
   box: {
     marginLeft: "39%",
     maxWidth: "50px",
     marginTop: "70px",
   },
-  stam: {
-    marginLeft: "39%",
-    marginTop: "30px",
+  withoutLabel: {
+    marginTop: theme.spacing(3),
   },
-  odstam: {
-    marginLeft: "36%",
-    marginTop: " 20px",
+  textField: {
+    width: "25ch",
+  },
+  btn: {
+    marginLeft: theme.spacing(4),
+  },
+  margin: {
+    margin: theme.spacing(1),
+    marginLeft: "20px",
   },
 }));
 
@@ -62,9 +76,25 @@ function Login(): JSX.Element {
   const [open, setOpen] = useState(false);
   const [age, setAge] = useState<string | number>("");
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setAge(event.target.value as number);
+  const [values, setValues] = React.useState({
+    showPassword: false,
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
   };
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  // const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  //   setAge(event.target.value as number);
+  // };
 
   const handleClose = () => {
     setOpen(false);
@@ -100,7 +130,7 @@ function Login(): JSX.Element {
             <br />
             <form onSubmit={handleSubmit(send)}>
              
-              <TextField
+              {/* <TextField
                 id="outlined-basic"
                 label="email"
                 variant="outlined"
@@ -139,10 +169,83 @@ function Login(): JSX.Element {
               <br />
               <FormHelperText error={true}>
                 {errors.password?.message}
+              </FormHelperText> */}
+
+<FormControl
+                variant="outlined"
+                className={clsx(classes.margin, classes.textField)}
+              >
+                {" "}
+                <InputLabel>Email</InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type="email"
+                  {...register("email", {
+                    minLength: {
+                      value: 5,
+                      message: "you must insert email",
+                    },
+                  })}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        edge="end"
+                      ></IconButton>
+                    </InputAdornment>
+                  }
+                  labelWidth={45}
+                />
+              </FormControl>
+
+              <FormHelperText error={true}>
+                {errors.email?.message}
               </FormHelperText>
 
               <br />
 
+              <FormControl
+                className={clsx(classes.margin, classes.textField)}
+                variant="outlined"
+              >
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={values.showPassword ? "text" : "password"}
+                  onChange={handleChange("password")}
+                  {...register("password", {
+                    minLength: {
+                      value: 5,
+                      message: "your password can not be less than 5 chars",
+                    },
+                  })}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {values.showPassword ? (
+                          <Visibility />
+                        ) : (
+                          <VisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  labelWidth={70}
+                />
+              </FormControl>
+
+              <FormHelperText error={true}>
+                {errors.password?.message}
+              </FormHelperText>
+
+           
               <FormControl className={classes.formControl}>
                 <InputLabel id="demo-controlled-open-select-label">
                   Client Type
@@ -203,21 +306,23 @@ function Login(): JSX.Element {
                 type="submit"
                 variant="contained"
                 color="primary"
-                className={classes.odstam}
+                className={classes.btn}
               >
                 Login
               </Button>
-            </form>
-          </CardContent>
 
-          <Button
+              <Button
             onClick={() => history.push("/home")}
             variant="contained"
             color="secondary"
-            className={classes.stam}
+            className={classes.btn}
           >
             back
           </Button>
+            </form>
+          </CardContent>
+
+       
         </Card>
       </div>
     </Box>

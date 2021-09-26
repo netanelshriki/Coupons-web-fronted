@@ -18,8 +18,9 @@ const useStyles = makeStyles((theme) => ({
   },
   cover: {
     backgroundImage:
-      "url(https://www.incimages.com/uploaded_files/image/1920x1080/getty_655998316_2000149920009280219_363765.jpg)",
+      "url(https://previews.123rf.com/images/ekina/ekina1802/ekina180201566/96334084-texture-background-template-pamper-your-design-with-a-luxurious-light-blue-silk-flag-the-blue-dip-ca.jpg)",
     backgroundPosition: "center",
+    // backgroundRepeat: "repeat-y",
     padding: "35px 25px",
     //width: '38rem'
     marginLeft: "80px",
@@ -59,10 +60,10 @@ function Cards(): JSX.Element {
         <Card className={classes.cover}>
           <CardContent>
             <Typography className={classes.title} gutterBottom>
-              our new books
+             check our coupons
             </Typography>
             <Typography variant="h5" className={classes.info}>
-              a lot a lot of not important things about our new books
+             there a lot of coupons just for you!
             </Typography>
           </CardContent>
           <CardActions>

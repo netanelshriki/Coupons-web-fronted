@@ -16,6 +16,7 @@ import store from "../../Redux/Store";
 import "./Coupons.css";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { CouponDownloadedAction } from "../../Redux/CouponsState";
+import axios from "axios";
 
 
 function Coupons(): JSX.Element {
@@ -27,7 +28,7 @@ function Coupons(): JSX.Element {
 
   useEffect(() => {
     const axiosGet = async () => {
-      const response = await tokenAxios.get<Coupon[]>(
+      const response = await axios.get<Coupon[]>(
         "http://localhost:8080/client/coupons"
       );
       const allCoupons = response.data;
@@ -42,7 +43,14 @@ function Coupons(): JSX.Element {
 
 
   async function buyCoupon(id) {
+    console.log("customer: "+customer[0]);
 
+    if(customer[0]===null) {
+  history.push("login");
+  notify.error("you have to login if you want to buy a coupon!");
+  return;
+
+}
     
     console.log(id);
 
@@ -64,12 +72,11 @@ const myCoupon = gets.find(x => x.id === id);
     try {
       const result = await tokenAxios.post<Coupon>(
         "http://localhost:8080/customer/buy",
-        coupon,
-        {
-          params: {
-            customerId: customer[0].id,
-          },
+        coupon,{
+        params: {
+          customerId: customer[0].id
         }
+      }
       );
       history.push("/area");
       notify.success("coupon added successfully!");
@@ -122,6 +129,7 @@ const myCoupon = gets.find(x => x.id === id);
         </TableHead>
 
         <TableBody>{gets && result}</TableBody>
+   
       </Table>
     </>
   );

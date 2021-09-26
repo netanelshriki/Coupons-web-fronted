@@ -52,15 +52,16 @@ export function authReducer(currentState: AuthAppState = new AuthAppState(),
     switch(action.type){
         case AuthActionType.Register: //Payload is registered user from backend
             newState.client = action.payload;
-            localStorage.setItem("user",JSON.stringify(newState.client)); // Saving in the session storage (won't be deleted)
+            localStorage.setItem("client",JSON.stringify(newState.client)); // Saving in the session storage (won't be deleted)
             break;
         case AuthActionType.Login://Payload is logged i user from backend
             newState.client = action.payload;
             localStorage.setItem("client",JSON.stringify(newState.client)); // Saving in the session storage (won't be deleted)
             break;
         case AuthActionType.Logout: // No payload
-            newState.client = null;
-            localStorage.removeItem("user");
+        newState.client = null;
+            localStorage.removeItem("client");
+          
             break;
             
     }
