@@ -9,6 +9,9 @@ import store from "./Components/Redux/Store";
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import Brightness7Icon from '@material-ui/icons/Brightness7';
+import Brightness2Icon from '@material-ui/icons/Brightness2';
+import {  HashRouter } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -63,6 +66,9 @@ function App() {
     setDarkMode(!darkMode);
   }
   
+  function mode(){
+    setDarkMode(!darkMode);
+  }
  
   return (
     <BrowserRouter >
@@ -134,13 +140,16 @@ function App() {
         <IconButton color="inherit">
           <AccountCircleIcon />
         </IconButton>
+        {darkMode===true ?<IconButton onClick={()=>mode()}><Brightness7Icon style={{fill: "yellow"}}/></IconButton >:<IconButton onClick={()=>mode()}><Brightness2Icon/></IconButton>}
+
       </Toolbar>
+
+
       <Divider />
 
       <Toolbar className={classes.tagline}>welcome to the Coupons web</Toolbar>
     </>
 
-          <Switch onChange={handleDarkMode} value={darkMode}/>
       
          <Routing />
      
