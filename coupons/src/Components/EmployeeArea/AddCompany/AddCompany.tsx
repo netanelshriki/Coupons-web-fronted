@@ -342,6 +342,15 @@ function AddCompany(): JSX.Element {
               </Button>
             </form>
           </CardContent>
+    
+          <Button onClick={()=>history.push("/find/customer")} className={classes.btn}
+             color="primary"
+               variant="contained"
+             >
+              
+             test
+           
+            </Button>
 
           <br />
         </Card>

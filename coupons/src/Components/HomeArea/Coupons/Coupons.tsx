@@ -5,7 +5,17 @@ import {
   TableHead,
   TableBody,
   IconButton,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  makeStyles,
+  Tooltip,
+  Typography,
+  Collapse,
 } from "@material-ui/core";
+import clsx from 'clsx';
 import { useState, useEffect } from "react";
 import CreateIcon from "@material-ui/icons/Create";
 import { useHistory } from "react-router-dom";
@@ -17,10 +27,64 @@ import "./Coupons.css";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { CouponDownloadedAction } from "../../Redux/CouponsState";
 import axios from "axios";
+import CouponGet from "../../../UserModel/CouponGet";
+import DeleteIcon from '@material-ui/icons/Delete';
+import ContactSupportIcon from '@material-ui/icons/ContactSupport';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+const useStyles = makeStyles((theme) => ({
+  card:{
+   marginLeft: theme.spacing(11),
+  },
+   root: {
+     maxWidth: "200px",
+       margin: theme.spacing(4),
+     opacity: 1,
+     "&:hover":{
+         opacity: "0.5",
+         transition: "1s",
+         
+         }
+ 
+   },
+   paper:{
+       margin: theme.spacing(2),
+ 
+   },
+   expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+   media: {
+     height: "200px",
+     width: "200px",
+   },
+   tooltip:{
+     opacity: "1",
+   //   margin: theme.spacing(2),
+     "&:hover":{
+       opacity: "1",
+   }
+ },
+ expandOpen: {
+  transform: 'rotate(180deg)',
+},
+ }));
+ 
 
 
 function Coupons(): JSX.Element {
-  const [gets, setGet] = useState<Coupon[]>([]);
+  const [gets, setGet] = useState<CouponGet[]>([]);
+  const classes = useStyles();
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+  
   const customer = useState(store.getState().authState.client);
   //const coupons = useState(store.getState().couponsState.coupons.)
 
@@ -28,18 +92,20 @@ function Coupons(): JSX.Element {
 
   useEffect(() => {
     const axiosGet = async () => {
-      const response = await axios.get<Coupon[]>(
+      const response = await axios.get<CouponGet[]>(
         "http://localhost:8080/client/coupons"
       );
       const allCoupons = response.data;
      
-      store.dispatch(CouponDownloadedAction(allCoupons));
+     // store.dispatch(CouponDownloadedAction(allCoupons));
      
       setGet(response.data);
+      
       console.log(response.data);
     };
     axiosGet();
-  }, []);
+  
+}, []);
 
 
   async function buyCoupon(id) {
@@ -57,6 +123,7 @@ function Coupons(): JSX.Element {
 const myCoupon = gets.find(x => x.id === id);
 
     const coupon = {
+     
       id: id,
       companyID: myCoupon.companyID,
       category: myCoupon.category,
@@ -66,11 +133,14 @@ const myCoupon = gets.find(x => x.id === id);
       endDate: myCoupon.endDate,
       amount: myCoupon.amount,
       price:myCoupon.price,
-      image: myCoupon.image,
+      imageID: myCoupon.imageID,
+    
     };
     console.log(coupon); 
+   
     try {
-      const result = await tokenAxios.post<Coupon>(
+     
+      const result = await tokenAxios.post<CouponGet>(
         "http://localhost:8080/customer/buy",
         coupon,{
         params: {
@@ -85,10 +155,10 @@ const myCoupon = gets.find(x => x.id === id);
     }
   }
 
-  const result = gets.map((get) => {
+  const result = gets.map((coupon) => {
     return (
       <>
-        <TableRow key={get.id}>
+        {/* <TableRow key={get.id}>
           <TableCell>{get.id} </TableCell>
           <TableCell align="right">{get.companyID}</TableCell>
           <TableCell align="right">{get.category}</TableCell>
@@ -104,14 +174,90 @@ const myCoupon = gets.find(x => x.id === id);
               <ShoppingCartIcon onClick={() => buyCoupon(get.id)} />
             </IconButton>
           </TableCell>
-        </TableRow>
+        </TableRow> */}
+
+<Grid spacing={5} >
+        <Card className={classes.root} >
+          
+              <CardContent>
+                <Typography>{coupon?.id}</Typography>
+                <Typography>{coupon?.title}</Typography>
+              </CardContent>
+              <CardMedia
+                className={classes.media}
+                image={"http://localhost:8080/client/coupons/images/" + coupon?.imageID}
+              />
+        
+              <CardActions>
+              <IconButton aria-label="add to favorites"
+           
+              >
+            
+              <DeleteIcon />
+            
+            </IconButton>
+    
+            <IconButton>
+              <ShoppingCartIcon onClick={() => buyCoupon(coupon?.id)} />
+            </IconButton>
+            <Tooltip title={coupon?.description} arrow className={classes.tooltip}>
+        
+          <IconButton>       
+               
+               <ContactSupportIcon />
+   
+    </IconButton>
+        </Tooltip>
+           
+              </CardActions>
+           
+              <CardActions disableSpacing>
+              <IconButton aria-label="add to favorites"
+              onClick={()=>console.log(coupon.id)}
+              >
+              <ContactSupportIcon />
+          
+            </IconButton>
+        
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+            
+            <CardContent>
+         
+            <Typography paragraph>Method:</Typography>
+
+            </CardContent>
+         
+            </Collapse>
+      
+            <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded,
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+             
+              </CardActions>
+         
+         
+            </Card>
+           
+            <br/>
+            <br/>
+          </Grid>
+
+
+
       </>
     );
   });
 
   return (
     <>
-      <Table className="Table" aria-label="simple table">
+      {/* <Table className="Table" aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Id</TableCell>
@@ -130,7 +276,14 @@ const myCoupon = gets.find(x => x.id === id);
 
         <TableBody>{gets && result}</TableBody>
    
-      </Table>
+      </Table> */}
+             
+              <Grid container className={classes.card} >
+
+              {gets && result}
+          
+             </Grid>
+   
     </>
   );
 }

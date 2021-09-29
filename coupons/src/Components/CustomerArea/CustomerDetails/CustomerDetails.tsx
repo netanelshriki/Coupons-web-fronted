@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import tokenAxios from "../../../Services/interceptor";
 import notify from "../../../Services/Notifilcation";
+import Coupon from "../../../UserModel/Coupon";
 import Customer from "../../../UserModel/Customer";
 import store from "../../Redux/Store";
 import "./CustomerDetails.css";
@@ -14,7 +15,8 @@ function CustomerDetails(): JSX.Element {
     const [gets, setGet] = useState<Customer>();
     const history = useHistory();
       const cust = useState(store.getState().authState.client);
-  
+      const [coupon, setCoupon] = useState<Coupon[]>(store.getState().couponsState.coupons)
+
       
       useEffect(() => {
           if (!store.getState().authState.client) {
@@ -39,6 +41,7 @@ function CustomerDetails(): JSX.Element {
 
 
  console.log(gets);
+ console.log("coupon: ",coupon[0]);
 
 
     return (

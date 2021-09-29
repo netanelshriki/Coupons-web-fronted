@@ -64,6 +64,13 @@ function CompanyAdvanced(): JSX.Element {
         <>
 {gets.length===0?
     <>
+        <Button
+            onClick={() => history.push("/add/coupon")}
+            variant="contained"
+            color="secondary"
+          >
+            add coupon
+          </Button>
                 <form onSubmit={handleSubmit(send)}>
               <TextField
                 id="outlined-basic"
@@ -117,7 +124,9 @@ function CompanyAdvanced(): JSX.Element {
           >
             home
           </Button>
-             
+                  
+      
+
                 </>
 
 

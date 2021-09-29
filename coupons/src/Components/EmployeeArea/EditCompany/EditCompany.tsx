@@ -70,7 +70,7 @@ function EditCompany(props:EditDetailsProps): JSX.Element {
        const history = useHistory();
        const classes = useStyles();
        const currentId = +props.match.params?.id 
-    const [company, setCompany] = useState(store.getState().EmployeeState.employees.find((c)=>c.id === +props.match.params?.id ));
+    const [company, setCompany] = useState(store.getState().employeeState.employees.find((c)=>c.id === +props.match.params?.id ));
    
     const [client,setClient] = useState(store.getState().authState.client);
    

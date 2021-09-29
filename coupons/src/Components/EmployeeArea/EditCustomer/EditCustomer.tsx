@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   box: {
     marginLeft: "39%",
     maxWidth: "50px",
-    marginTop: "70px",
+    marginTop: "0px",
   },
   pos: {
     marginBottom: 0,
@@ -75,7 +75,7 @@ function EditEmployee(props: EditDetailsProps): JSX.Element {
   const [employee, setEmployee] = useState(
     store
       .getState()
-      .EmployeeState.employees.find((c) => c.id === +props.match.params?.id)
+      .employeeState.employees.find((c) => c.id === +props.match.params?.id)
   );
 
   const [client, setClient] = useState(store.getState().authState.client);
@@ -126,7 +126,7 @@ function EditEmployee(props: EditDetailsProps): JSX.Element {
     setEmployee(
       store
         .getState()
-        .EmployeeState.employees.find((c) => c.id === +props.match.params?.id)
+        .employeeState.employees.find((c) => c.id === +props.match.params?.id)
     );
 
     notify.success("Customer updated!");

@@ -31,12 +31,12 @@ export function EmployeesDownloadedAction(employees: UserModel[]): EmployeeActio
     return { type: EmployeesActionType.EmployeesDownloaded, payload: employees };
 }
 
-export function EmployeesAddedAction(cat: UserModel): EmployeeAction {
-    return { type: EmployeesActionType.EmployeesAdded, payload: cat };
+export function EmployeesAddedAction(employee: UserModel): EmployeeAction {
+    return { type: EmployeesActionType.EmployeesAdded, payload: employee };
 }
 
-export function EmployeesUpdatedAction(cat: UserModel): EmployeeAction {
-    return { type: EmployeesActionType.EmployeesUpdated, payload: cat };
+export function EmployeesUpdatedAction(employee: UserModel): EmployeeAction {
+    return { type: EmployeesActionType.EmployeesUpdated, payload: employee };
 }
 
 export function EmployeesDeletedAction(id:number): EmployeeAction {
@@ -44,9 +44,9 @@ export function EmployeesDeletedAction(id:number): EmployeeAction {
 }
 
 // Step 5 - Reducer function perform the required action
-export function EmployeesReducer(currentState: EmployeesAppState = new EmployeesAppState(),action:EmployeeAction): EmployeesAppState{
-    // const newState = new CatsAppState();
-    // newState.cats = currentState.cats;
+export function employeesReducer(currentState: EmployeesAppState = new EmployeesAppState(),action:EmployeeAction): EmployeesAppState{
+    // const newState = new EmployeesAppState();
+    // newState.employees = currentState.employees;
 
     const newState = {...currentState} //Spread Operator
     switch(action.type){

@@ -1,3 +1,5 @@
+import Coupon from "./Coupon";
+
 class UserModel{
 
     public id?: number;
@@ -6,6 +8,7 @@ class UserModel{
     public email?:string;
     public password?:string;
     public clientType?:string;
+   public  coupons? : Coupon[];
     
     
     }

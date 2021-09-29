@@ -1,14 +1,14 @@
  class Coupon{
-public id: number;
+public id?: number;
 public companyID: string;
 public category: string;
 public title: string; 
 public description: string;
-public startDate: Date;
-public endDate: Date;
+public startDate?: string;
+public endDate?: string;
 public amount: number;
 public price: number;
-public image: string;
+public image: FileList;
 
 }
 export default Coupon
