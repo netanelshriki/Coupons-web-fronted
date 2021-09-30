@@ -125,7 +125,7 @@ function AddEmployee(): JSX.Element {
       store.dispatch(EmployeesAddedAction(added));
 
       notify.success("Customer " + user.firstName + " created!");
-      history.push("/employees");
+      history.push("/customers");
     } catch (err) {
    
     }

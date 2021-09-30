@@ -1,5 +1,6 @@
 import { combineReducers, createStore } from "redux";
 import { authReducer } from "./AuthState";
+import { CouponGetReducer } from "./CouponGetState";
 import { CouponReducer } from "./CouponsState";
 import { employeesReducer } from "./EmployeesSatate";
 
@@ -13,7 +14,7 @@ import { employeesReducer } from "./EmployeesSatate";
 
 
 //Multiple catsReducer
-const reducers = combineReducers({employeeState: employeesReducer,authState: authReducer, couponsState: CouponReducer});
+const reducers = combineReducers({employeeState: employeesReducer,authState: authReducer, couponsState: CouponReducer, couponsGetState: CouponGetReducer});
 const store = createStore(reducers)
 
 // For getting data

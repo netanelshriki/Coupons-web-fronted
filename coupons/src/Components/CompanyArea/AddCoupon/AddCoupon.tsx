@@ -61,7 +61,7 @@ function AddCoupon(): JSX.Element {
         );
       setCoupon(request.data);
       console.log(request.data);
-      history.push("/coupons");
+      history.push("/company");
     } catch (err) {
       // console.log(err.message);
     }

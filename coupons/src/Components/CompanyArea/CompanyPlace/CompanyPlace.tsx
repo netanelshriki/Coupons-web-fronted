@@ -12,7 +12,7 @@ import Coupon from "../../../UserModel/Coupon";
 import CouponGet from "../../../UserModel/CouponGet";
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import { CouponGetDownloadedAction } from "../../Redux/CouponGetState";
 
 const useStyles = makeStyles((theme) => ({
   card:{
@@ -64,6 +64,7 @@ function CompanyPlace(): JSX.Element {
     const token = useState(store.getState().authState.client.token);
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
+    const [couponsUpdate,setCouponsUpdate] = useState<CouponGet[]>([])
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
@@ -89,10 +90,24 @@ function CompanyPlace(): JSX.Element {
               }
              } );
           setGet(response.data);
-       
+          setCouponsUpdate(response.data);
+          store.dispatch(CouponGetDownloadedAction(response.data));
+  console.log("image id "+couponsUpdate[1]?.imageID);
         };
         axiosGet();
+
       }, []);
+
+      async function deleteCoupon(id){
+     
+        console.log("id to delete: "+id);
+              
+        const deleteCoupon = await tokenAxios.delete<any>("http://localhost:8080/company/coupons/"+id) ;
+      }
+
+      async function updateCoupon(id){
+        history.push("/coupon/"+id);
+      }
 
 // const result = gets.map((get) => {
 //   return (
@@ -133,13 +148,21 @@ const result = gets.map((coupon) => {
           />
     
           <CardActions>
-          <IconButton aria-label="add to favorites"
-       
-          >
         
-          <DeleteIcon />
+             <IconButton aria-label="add to favorites">
         
-        </IconButton>
+          <DeleteIcon onClick={() =>deleteCoupon(coupon.id)}/>
+        
+      
+              </IconButton>
+
+              
+              <IconButton aria-label="add to favorites">
+        
+        <CreateIcon onClick={() =>updateCoupon(coupon.id)}/>
+      
+    
+            </IconButton>
 
         {/* <IconButton>
           <ShoppingCartIcon onClick={() => buyCoupon(coupon?.id)} />
