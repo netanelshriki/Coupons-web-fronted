@@ -96,7 +96,7 @@ function CompanyPlace(): JSX.Element {
         };
         axiosGet();
 
-      }, []);
+      }, [gets]);
 
       async function deleteCoupon(id){
      
