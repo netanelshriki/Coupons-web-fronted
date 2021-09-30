@@ -182,6 +182,8 @@ const myCoupon = gets.find(x => x.id === id);
               <CardContent>
                 <Typography>{coupon?.id}</Typography>
                 <Typography>{coupon?.title}</Typography>
+  
+              
               </CardContent>
               <CardMedia
                 className={classes.media}

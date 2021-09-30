@@ -161,9 +161,9 @@ export default function SideBar({children}) {
     <ListItemText primary='buy coupon'/>
       </Button>
       : client?.clientType===ClientType.company?
-      <Button onClick={()=> history.push("/company/advanced")} className={classes.btn}>
+      <Button onClick={()=> history.push("/company/options")} className={classes.btn}>
       <ListItemIcon> <AccountBoxIcon /></ListItemIcon>
-    <ListItemText primary='max prise'/>
+    <ListItemText primary='options'/>
       </Button>
       :
       <Button onClick={()=> history.push("/login")} className={classes.btn}>

@@ -11,6 +11,7 @@ import "./AddCoupon.css";
 function AddCoupon(): JSX.Element {
 
     const [company,setCompany] = useState(store.getState().authState.client);
+    const [coupon,setCoupon] = useState<Coupon>();
   const {
     register,
     handleSubmit,
@@ -32,14 +33,13 @@ function AddCoupon(): JSX.Element {
   
     async function addCoupon(coupon: Coupon) {
         setCompany(store.getState().authState.client);
+        // const start = new Date(coupon.startDate);
+        // const end = new Date(coupon.endDate);
+        
     console.log(coupon);
     try {
-      
+    
       const formData = new FormData();
-
-      //       const start = new Date(coupon.startDate);
-      // const end = new Date(coupon.endDate);
-   
       
       formData.append("companyID", company.id.toString());
       formData.append("category", coupon.category);
@@ -51,14 +51,15 @@ function AddCoupon(): JSX.Element {
       formData.append("price", coupon.price.toString());
       formData.append("image", coupon.image?.item(0));
 
-      const request = await tokenAxios.post<Coupon>(
+     
+     const request = await tokenAxios.post<Coupon>(
      
         
         "http://localhost:8080/company/coupon",
         formData
      
         );
-    
+      setCoupon(request.data);
       console.log(request.data);
       history.push("/coupons");
     } catch (err) {
@@ -70,10 +71,16 @@ function AddCoupon(): JSX.Element {
  
     
       <form onSubmit={handleSubmit(addCoupon)}>
+       
         <>
       
 
           {/* {errors.companyID?.type==='minLength' && <span>name is too short</span>} */}
+
+{/* 
+          <input className="form-control" type="number" name="companyID" 
+                    defaultValue={company.id}
+                        {...register("companyID")}/> */}
 
           <br />
 
@@ -113,21 +120,24 @@ function AddCoupon(): JSX.Element {
 
           <br />
 
-          <TextField
+      
+          <input
             id="outlined-basic"
-            label="start date"
-            variant="outlined"
+            // label="start date"
+            // variant="outlined"
             type="date"
+            name="startDate"
             {...register("startDate",{ required: true, })}
          
          />     
             <br />
         
-           <TextField
+           <input
             id="outlined-basic"
-            label="end date"
-            variant="outlined"
+            // label="end date"
+            // variant="outlined"
             type="date"
+            name="endDate"
             {...register("endDate",{ required: true, })}
         
         />   

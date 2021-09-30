@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 
 function CustomerCoupons(): JSX.Element {
 
-    const [gets, setGet] = useState<CouponGet[]>([]);
+    const [gets, setGets] = useState<CouponGet[]>([]);
   const history = useHistory();
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
@@ -95,20 +95,26 @@ function CustomerCoupons(): JSX.Element {
 
 
     useEffect(() => {
-           if (!store.getState().authState.client) {
+         
+      if (!store.getState().authState.client) {
           notify.error("please login");
           history.push("/login");
         }
 
       const axiosGet = async () => {
-        const response = await axios.get<CouponGet[]>(
-          "http://localhost:8080/client/coupons"
-        );
-        const allCoupons = response.data;
+      
+        const response = await tokenAxios.get<CouponGet[]>(
+          "http://localhost:8080/customer/coupons", {
+            params: {
+                customerId: customer[0].id,
+            }
+           } );
+       
+        //const allCoupons = response.data;
        
        // store.dispatch(CouponDownloadedAction(allCoupons));
        
-        setGet(response.data);
+        setGets(response.data);
         
         console.log(response.data);
       };
@@ -162,9 +168,10 @@ function CustomerCoupons(): JSX.Element {
     
               */}
      const result = gets.map((coupon) => {
-    return (
-      <>
-    <Grid spacing={5} >
+    
+      return (
+      <div>
+      <Grid spacing={5} >
         <Card className={classes.root} >
           
               <CardContent>
@@ -174,6 +181,7 @@ function CustomerCoupons(): JSX.Element {
               <CardMedia
                 className={classes.media}
                 image={"http://localhost:8080/client/coupons/images/" + coupon?.imageID}
+              
               />
         
               <CardActions>
@@ -240,16 +248,19 @@ function CustomerCoupons(): JSX.Element {
             <br/>
           </Grid>
 
-          </>
+          </div>
+    
     );
+ 
   });
 
 
           return (
         <>
+         
             <Grid container className={classes.card} >
 
-{gets && result}
+      {gets && result}
 
 </Grid>
   

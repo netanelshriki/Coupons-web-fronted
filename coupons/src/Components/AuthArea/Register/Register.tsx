@@ -102,7 +102,7 @@ function Register(): JSX.Element {
   };
   async function send(user: UserAuthModel) {
     const customerRegister = {
-      id: user.id,
+      // id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,

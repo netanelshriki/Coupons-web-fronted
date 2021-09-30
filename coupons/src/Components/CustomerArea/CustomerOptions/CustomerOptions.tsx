@@ -64,14 +64,14 @@ const classes = useStyles();
             </ColorButton>  
             
             
-            <ColorButton onClick={()=>history.push("/find/customer")} className={classes.btn}
+            {/* <ColorButton onClick={()=>history.push("/find/customer")} className={classes.btn}
              color="primary"
                variant="contained"
              >
               
              test
            
-            </ColorButton>
+            </ColorButton> */}
 
 
 <br/>

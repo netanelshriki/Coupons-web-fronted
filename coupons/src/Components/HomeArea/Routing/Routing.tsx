@@ -24,6 +24,7 @@ import CustomerCategory from "../../CustomerArea/CustomerCategory/CustomerCatego
 import CustomerOptions from "../../CustomerArea/CustomerOptions/CustomerOptions";
 import OneCustomer from "../../EmployeeArea/OneCustomer/OneCustomer";
 import AddCoupon from "../../CompanyArea/AddCoupon/AddCoupon";
+import CompanyOptions from "../../CompanyArea/CompanyOptions/CompanyOptions";
 
 function Routing(): JSX.Element {
   return (
@@ -53,6 +54,7 @@ function Routing(): JSX.Element {
         <Route path="/add/company" component={AddCompany} exact />
         <Route path="/find/customer" component={OneCustomer} exact />
         <Route path="/add/coupon" component={AddCoupon} exact />
+        <Route path="/company/options" component={CompanyOptions} exact />
         <Redirect from="/" to="/home" exact />
       </Switch>
     </div>
