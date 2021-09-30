@@ -1,7 +1,11 @@
-import { Input, TextField } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { Table, TableHead, TableRow, TableCell, TableBody, TextField, Button } from "@material-ui/core";
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import tokenAxios from "../../../Services/interceptor";
+import notify from "../../../Services/Notifilcation";
 import Coupon from "../../../UserModel/Coupon";
-import UserModel from "../../../UserModel/UserModel";
+import Customer from "../../../UserModel/Customer";
 import store from "../../Redux/Store";
 import "./OneCustomer.css";
 
@@ -9,50 +13,93 @@ import "./OneCustomer.css";
 
 function OneCustomer(): JSX.Element {
 
-    // const [text, setText] = useState({txt:""});
-const [customer, setCustomer] = useState<UserModel[]>(store.getState().employeeState.employees);
-const [coupon, setCoupon] = useState<Coupon[]>(store.getState().couponsState.coupons)
-// const handleChange = e => 
-//     setText({ ...text,[e.target.name]: e.target.value});
-useEffect(() => {
+  const [gets, setGet] = useState<Customer>();
+  const history = useHistory();
+    const cust = useState(store.getState().authState.client);
+    const [coupon, setCoupon] = useState<Coupon[]>(store.getState().couponsState.coupons)
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm<any>();
+    // const classes = useStyles();
+    const [expanded, setExpanded] = useState(false);
   
-   setCustomer(store.getState().employeeState.employees);
-   
-});
-
-console.log("coupon: ",coupon[0]);
-
-console.log("customer: ",customer[0]);
+    const handleExpandClick = () => {
+      setExpanded(!expanded);
+    };
     
-const res = customer.map((custom)=>{
-    return (
-   <>
-        <span key={custom.id}>{custom.email}</span>
-        <br/>
-        </>
+    // useEffect(() => {
+    //     if (!store.getState().authState.client) {
+    //       notify.error("please login");
+    //       history.push("/login");
+    //     }
 
-)});
-
-return (
+        async function send(send: any) {
       
-      <div className="OneCustomer">
-		  
-        <TextField
-          id="filled-read-only-input"
-   
-          variant="filled"
-       
-        />
-<br/>
 
-        <span>
+                     
+          const response = await tokenAxios.get<Customer>(
+            "http://localhost:8080/admin/customers/"+send.customerId)
+          setGet(response.data);
          
+      };
+
+  return (
+     
+     <>
+
+
+<>
+<form onSubmit={handleSubmit(send)}>
+              <TextField
+                id="outlined-basic"
+                label="max prise"
+                variant="outlined"
+                type="number"
+                {...register("customerId")}
+              />
+              </form>
+<Button
+              type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Check out
+              </Button>
+</>
+
+
+
+     <Table className="Table" aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Id</TableCell>
+                  <TableCell align="right">first name</TableCell>
+                  <TableCell align="right"> last name</TableCell>
+                  <TableCell align="right">email</TableCell>
+                  <TableCell align="right">password</TableCell>
+                     
+                </TableRow>
+              </TableHead>
+              <TableBody >
+       
+       <TableRow>
+         <TableCell align="right">{gets?.id}</TableCell>
+         <TableCell align="right">{gets?.firstName}</TableCell>
+         <TableCell align="right">{gets?.lastName}</TableCell>
+         <TableCell align="right">{gets?.email}</TableCell>
+         <TableCell align="right">{gets?.password}</TableCell>
+     
     
-        {customer && res}
-         
-        </span>
-        </div>
-    );
+       </TableRow>
+     </TableBody>    
+              </Table>
+
+            
+            
+      </>
+  );
 }
 
 export default OneCustomer;

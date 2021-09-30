@@ -26,6 +26,7 @@ import OneCustomer from "../../EmployeeArea/OneCustomer/OneCustomer";
 import AddCoupon from "../../CompanyArea/AddCoupon/AddCoupon";
 import CompanyOptions from "../../CompanyArea/CompanyOptions/CompanyOptions";
 import EditCoupon from "../../CompanyArea/EditCoupon/EditCoupon";
+import RegisterCompany from "../../AuthArea/RegisterCompany/RegisterCompany";
 
 function Routing(): JSX.Element {
   return (
@@ -33,6 +34,7 @@ function Routing(): JSX.Element {
       <Switch>
         <Route path="/home" component={Cards} exact />
         <Route path="/register" component={Register} exact />
+        <Route path="/register/company" component={RegisterCompany} exact />
         <Route path="/login" component={Login} exact />
         <Route path="/logout" component={Logout} exact />
         <Route path="/coupons" component={Coupons} exact />
