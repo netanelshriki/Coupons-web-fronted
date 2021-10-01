@@ -12,6 +12,8 @@ import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Coupon from "../../../UserModel/Coupon";
+import CreateIcon from "@material-ui/icons/Create";
+import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl";
 
 
 
@@ -56,6 +58,9 @@ const useStyles = makeStyles((theme) => ({
  expandOpen: {
   transform: 'rotate(180deg)',
 },
+btn:{
+  marginLeft: theme.spacing(45),
+  },
  }));
 
 function CompanyAdvanced(): JSX.Element {
@@ -103,6 +108,10 @@ function CompanyAdvanced(): JSX.Element {
       const deleteCoupon = await tokenAxios.delete<any>("http://localhost:8080/company/coupons/"+id) ;
     }
 
+    
+    async function updateCoupon(id) {
+      history.push("/coupon/" + id);
+    }
     //  const result = gets.map((get) => {
     //     return (
          
@@ -130,8 +139,7 @@ function CompanyAdvanced(): JSX.Element {
         <Card className={classes.root} >
           
               <CardContent>
-                <Typography>{coupon?.id}</Typography>
-                <Typography>{coupon?.title}</Typography>
+                <Typography>{coupon?.description}</Typography>
               </CardContent>
               <CardMedia
                 className={classes.media}
@@ -139,65 +147,37 @@ function CompanyAdvanced(): JSX.Element {
               
               />
         
-              <CardActions>
-              <Button aria-label="add to favorites"
-           
+        <CardActions>
+              <Tooltip
+                title={"delete coupon"}
+                arrow
+                className={classes.tooltip}
               >
-            
-              <DeleteIcon onClick={() =>deleteCoupon(coupon?.id)}/>
-            
-            </Button>
-    
-            {/* <IconButton>
-              <ShoppingCartIcon onClick={() => buyCoupon(coupon?.id)} />
-            </IconButton> */}
-          
-            <Tooltip title={coupon?.description} arrow className={classes.tooltip}>
-        
-          <IconButton>       
-               
-               <ContactSupportIcon />
-   
-    </IconButton>
-        </Tooltip>
-           
-              </CardActions>
-           
-              <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites"
-              onClick={()=>console.log(coupon.id)}
-              >
-              <ContactSupportIcon />
-          
-            </IconButton>
-        
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-            
-            <CardContent>
-         
-            <Typography paragraph>Method:</Typography>
+                <IconButton>
+                  <DeleteIcon onClick={() => deleteCoupon(coupon.id)} />
+                </IconButton>
+              </Tooltip>
 
-            </CardContent>
-         
-            </Collapse>
-      
-            <IconButton
-         
-         className={clsx(classes.expand, {
-          
-            [classes.expandOpen]: expanded,
-          
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-             
-              </CardActions>
-         
-         
+              <Tooltip
+                title={"update coupon"}
+                arrow
+                className={classes.tooltip}
+              >
+                <IconButton>
+                  <CreateIcon onClick={() => updateCoupon(coupon.id)} />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip
+                title={"the amount is: " + coupon?.amount}
+                arrow
+                className={classes.tooltip}
+              >
+                <IconButton>
+                  <FormatListNumberedRtlIcon />
+                </IconButton>
+              </Tooltip>
+            </CardActions>
             </Card>
            
             <br/>
@@ -215,13 +195,7 @@ function CompanyAdvanced(): JSX.Element {
         <>
 {gets.length===0?
     <>
-        <Button
-            onClick={() => history.push("/add/coupon")}
-            variant="contained"
-            color="secondary"
-          >
-            add coupon
-          </Button>
+    
                 <form onSubmit={handleSubmit(send)}>
               <TextField
                 id="outlined-basic"
@@ -276,13 +250,26 @@ function CompanyAdvanced(): JSX.Element {
                 <br/>
                 <br/>
 
+           
                 <Button
             onClick={() => history.push("/")}
             variant="contained"
             color="secondary"
+            className={classes.btn}
           >
             home
+          </Button>   
+           
+            <Button
+            onClick={() => history.goBack()}
+            variant="contained"
+            color="primary"
+            className={classes.btn}
+
+          >
+            back
           </Button>
+        
                   
       
 

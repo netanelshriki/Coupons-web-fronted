@@ -31,13 +31,14 @@ import CouponGet from "../../../UserModel/CouponGet";
 import DeleteIcon from '@material-ui/icons/Delete';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 const useStyles = makeStyles((theme) => ({
   card:{
    marginLeft: theme.spacing(11),
   },
    root: {
-     maxWidth: "200px",
+     maxWidth: "230px",
        margin: theme.spacing(4),
      opacity: 1,
      "&:hover":{
@@ -59,8 +60,8 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
    media: {
-     height: "200px",
-     width: "200px",
+     height: "220px",
+     width: "220px",
    },
    tooltip:{
      opacity: "1",
@@ -180,8 +181,7 @@ const myCoupon = gets.find(x => x.id === id);
         <Card className={classes.root} >
           
               <CardContent>
-                <Typography>{coupon?.id}</Typography>
-                <Typography>{coupon?.title}</Typography>
+                <Typography>{coupon?.description}</Typography>
   
               
               </CardContent>
@@ -191,29 +191,69 @@ const myCoupon = gets.find(x => x.id === id);
               />
         
               <CardActions>
-              <IconButton aria-label="add to favorites"
+              {/* <IconButton aria-label="add to favorites"
            
               >
             
               <DeleteIcon />
             
-            </IconButton>
+            </IconButton> */}  
+           
+          
     
-            <IconButton>
+            {/* <IconButton>
               <ShoppingCartIcon onClick={() => buyCoupon(coupon?.id)} />
-            </IconButton>
-            <Tooltip title={coupon?.description} arrow className={classes.tooltip}>
+            </IconButton> */}
+
+<Tooltip title={"buy coupon!"} arrow 
+className={classes.tooltip}
+onClick={() => buyCoupon(coupon?.id)}
+>
+        
+        <IconButton>       
+             
+             <              ShoppingCartIcon
+/>
+ 
+  </IconButton>
+      </Tooltip>
+
+            
+
+
+
+
+            <Tooltip title={coupon?.title} arrow className={classes.tooltip}>
         
           <IconButton>       
                
                <ContactSupportIcon />
    
     </IconButton>
+        </Tooltip>  
+         
+            <Tooltip title={coupon?.amount+"$"} arrow className={classes.tooltip}>
+        
+          <IconButton>       
+               
+               <MonetizationOnIcon />
+   
+    </IconButton>
+        </Tooltip>
+                
+                  <Tooltip title={"will be expired in: "+coupon?.endDate} arrow className={classes.tooltip}>
+        
+          <IconButton>       
+               
+               <              EventAvailableIcon
+ />
+   
+    </IconButton>
         </Tooltip>
            
               </CardActions>
            
-              <CardActions disableSpacing>
+              {/* <CardActions disableSpacing>
               <IconButton aria-label="add to favorites"
               onClick={()=>console.log(coupon.id)}
               >
@@ -225,7 +265,7 @@ const myCoupon = gets.find(x => x.id === id);
             
             <CardContent>
          
-            <Typography paragraph>Method:</Typography>
+            <Typography paragraph>{coupon.description}</Typography>
 
             </CardContent>
          
@@ -242,7 +282,7 @@ const myCoupon = gets.find(x => x.id === id);
           <ExpandMoreIcon />
         </IconButton>
              
-              </CardActions>
+              </CardActions> */}
          
          
             </Card>
