@@ -110,6 +110,7 @@ function Coupons(): JSX.Element {
 
 
   async function buyCoupon(id) {
+  
     console.log("customer: "+customer[0]);
 
     if(customer[0]===null) {

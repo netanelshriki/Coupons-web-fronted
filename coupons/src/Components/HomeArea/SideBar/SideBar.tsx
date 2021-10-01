@@ -189,9 +189,9 @@ export default function SideBar({children}) {
     <ListItemText primary='options'/>
       </Button>
       : 
-      <Button onClick={()=> history.push("/company/category")} className={classes.btn}>
+      <Button onClick={()=> history.push("/more")} className={classes.btn}>
       <ListItemIcon> <AccountBoxIcon /></ListItemIcon>
-    <ListItemText primary='by category'/>
+    <ListItemText primary='more...'/>
       </Button>
      }
                   </ListItem>

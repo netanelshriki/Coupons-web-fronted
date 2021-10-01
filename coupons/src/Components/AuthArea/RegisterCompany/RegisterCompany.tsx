@@ -343,14 +343,14 @@ function RegisterCompany(): JSX.Element {
                 </form>
               </CardContent>
         
-              <Button onClick={()=>history.push("/find/customer")} className={classes.btn}
+              {/* <Button onClick={()=>history.push("/find/customer")} className={classes.btn}
                  color="primary"
                    variant="contained"
                  >
                   
                  test
                
-                </Button>
+                </Button> */}
     
               <br />
             </Card>
