@@ -52,7 +52,7 @@ console.log("image id: "+couponImage.companyID)
       // updating DB
       // "http://localhost:8080/company/coupon/"
     const response = await tokenAxios.put<any>(
-   globals.urls.company+"coupon"+currentId,
+   globals.urls.company+"coupon/"+currentId,
       couponUpdate
     );
     history.push("/company")

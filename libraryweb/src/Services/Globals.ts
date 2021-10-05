@@ -3,7 +3,7 @@ class Globals{
 
 class DevelopmentGlobals extends Globals{
     public urls = {
-        customers:  "http://localhost:8080/customers/",
+        customers:  "http://localhost:8080/customer/",
         admin:  "http://localhost:8080/admin/",
         company: "http://localhost:8080/company/",
         client: "http://localhost:8080/client/",
